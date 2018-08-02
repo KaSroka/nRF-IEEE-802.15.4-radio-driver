@@ -39,10 +39,10 @@
  */
 
 /**@brief RTC clock frequency. */
-#define NRF_802154_RTC_FREQUENCY             32768UL
+#define NRF_802154_RTC_FREQUENCY 32768UL
 
 /**@brief Defines number of microseconds in one second. */
-#define NRF_802154_US_PER_S                  1000000ULL
+#define NRF_802154_US_PER_S      1000000ULL
 
 /**@brief Ceil division helper */
 #define NRF_802154_DIVIDE_AND_CEIL(A, B) (((A) + (B) - 1) / (B))

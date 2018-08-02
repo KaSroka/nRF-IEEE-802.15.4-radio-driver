@@ -176,8 +176,11 @@ static inline bool timer_is_set_to_margin(void)
 
 static inline uint32_t ticks_to_timeslot_end_get(void)
 {
+    uint32_t cc      = NRF_RTC0->CC[1];
+    uint32_t counter = NRF_RTC0->COUNTER;
+
     // We add one tick as RTC might be just about to increment COUNTER value.
-    return (NRF_RTC0->CC[1] - (NRF_RTC0->COUNTER + 1)) & RTC_COUNTER_COUNTER_Msk;
+    return (cc - (counter + 1)) & RTC_COUNTER_COUNTER_Msk;
 }
 
 static inline uint32_t safe_time_to_timeslot_end_get(void)
