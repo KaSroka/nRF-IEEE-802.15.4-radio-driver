@@ -185,9 +185,17 @@ static inline uint32_t ticks_to_timeslot_end_get(void)
 
 static inline uint32_t safe_time_to_timeslot_end_get(void)
 {
-    return NRF_802154_RTC_TICKS_TO_US(ticks_to_timeslot_end_get())
-           - m_config.timeslot_safe_margin
-           - TIMER_TO_SIGNAL_JITTER_US;
+    uint32_t margin = m_config.timeslot_safe_margin + TIMER_TO_SIGNAL_JITTER_US;
+    uint32_t timeslot_end = NRF_802154_RTC_TICKS_TO_US(ticks_to_timeslot_end_get());
+
+    if (timeslot_end > margin)
+    {
+        return timeslot_end - margin;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 /**@brief Get timeslot margin. */
